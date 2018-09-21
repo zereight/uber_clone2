@@ -1,7 +1,5 @@
-console.log("work!");
-
 import { Options } from "graphql-yoga";
-import app from "./app";
+import  app from "./app";
 
 const PORT : number | string = process.env.PORT || 4000;
 const PLAYGROUND_ENDPOINT : string = "/playground";
@@ -17,5 +15,8 @@ const appOptions : Options = {
 const handleAppStart = ():void => {
     console.log(`Listening on port ${PORT}`);
 };
+
+
+
 
 app.start(appOptions, handleAppStart);
