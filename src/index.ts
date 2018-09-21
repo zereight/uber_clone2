@@ -8,7 +8,11 @@ const GRAPHQL_ENDPOINT : string = "/graphql";
 
 const appOptions : Options = {
     port : PORT,
-    playground : PLAYGROUND_ENDPOINT,
+    playground : PLAYGROUND_ENDPOINT, 
+    // yarn dev 한다음,
+    //c9 에서 Run 실행하고
+    //https://asdsdasd-rlaeogus890.c9users.io/playground 로 접속하면 
+    //graphql playground 볼수 있다.!
     endpoint : GRAPHQL_ENDPOINT
 };
 

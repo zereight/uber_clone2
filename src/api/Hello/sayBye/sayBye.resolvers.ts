@@ -3,3 +3,5 @@ const resolvers = {
         sayBye: () => "Hey Bye how are ya"
     }
 };
+
+export default resolvers;
