@@ -1,5 +1,5 @@
 Arguments: 
-  /home/ubuntu/.nvm/versions/node/v6.11.2/bin/node /home/ubuntu/.nvm/versions/node/v6.11.2/bin/yarn types
+  /home/ubuntu/.nvm/versions/node/v6.11.2/bin/node /home/ubuntu/.nvm/versions/node/v6.11.2/bin/yarn add ormConfig
 
 PATH: 
   /home/ubuntu/.nvm/versions/node/v6.11.2/bin:/usr/local/rvm/gems/ruby-2.4.0/bin:/usr/local/rvm/gems/ruby-2.4.0@global/bin:/usr/local/rvm/rubies/ruby-2.4.0/bin:/mnt/shared/bin:/home/ubuntu/workspace/node_modules/.bin:/home/ubuntu/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/mnt/shared/sbin:/opt/gitl:/opt/go/bin:/mnt/shared/c9/app.nw/bin:/usr/local/rvm/bin
@@ -14,12 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  SyntaxError: /home/ubuntu/workspace/Uber/v1/package.json: Unexpected token / in JSON at position 312
-      at Object.parse (native)
-      at /home/ubuntu/.nvm/versions/node/v6.11.2/lib/node_modules/yarn/lib/cli.js:1130:59
-      at next (native)
-      at step (/home/ubuntu/.nvm/versions/node/v6.11.2/lib/node_modules/yarn/lib/cli.js:92:30)
-      at /home/ubuntu/.nvm/versions/node/v6.11.2/lib/node_modules/yarn/lib/cli.js:103:13
+  Error: https://registry.yarnpkg.com/ormConfig: Not found
+      at Request.params.callback [as _callback] (/home/ubuntu/.nvm/versions/node/v6.11.2/lib/node_modules/yarn/lib/cli.js:64202:18)
+      at Request.self.callback (/home/ubuntu/.nvm/versions/node/v6.11.2/lib/node_modules/yarn/lib/cli.js:137468:22)
+      at emitTwo (events.js:106:13)
+      at Request.emit (events.js:191:7)
+      at Request.<anonymous> (/home/ubuntu/.nvm/versions/node/v6.11.2/lib/node_modules/yarn/lib/cli.js:138440:10)
+      at emitOne (events.js:96:13)
+      at Request.emit (events.js:188:7)
+      at IncomingMessage.<anonymous> (/home/ubuntu/.nvm/versions/node/v6.11.2/lib/node_modules/yarn/lib/cli.js:138362:12)
+      at IncomingMessage.g (events.js:292:16)
+      at emitNone (events.js:91:20)
 
 npm manifest: 
   {
@@ -30,8 +35,8 @@ npm manifest:
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "dev": "cd src && nodemon --exec ts-node index.ts -e ts,graphql",
-      "pretypes" : "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql", //yarn types 하면 먼저 시행됨
-      "types" : "graphql-to-typescript ./src/schema.graphql ./src/types/graph.ts" //yarn types 하면 graphql모아서 새로운 schemas.ts 파일을 만듬 (gpl -> ts)
+      "pretypes" : "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql", 
+      "types" : "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts" 
     },
     "author": "",
     "license": "ISC",

@@ -1,5 +1,7 @@
 import { Options } from "graphql-yoga";
+import { createConnection } from "typeorm";
 import  app from "./app";
+import connectionOptions from "./ormConfig";
 
 const PORT : number | string = process.env.PORT || 4000;
 const PLAYGROUND_ENDPOINT : string = "/playground";
@@ -23,4 +25,8 @@ const handleAppStart = ():void => {
 
 
 
-app.start(appOptions, handleAppStart);
+
+createConnection( connectionOptions ).then(  () => {    
+    //typeorm 을 통하여 DB에 연결한후 app 실행
+    app.start(appOptions, handleAppStart);
+});
