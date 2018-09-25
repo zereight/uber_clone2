@@ -28,7 +28,7 @@ class User extends BaseEntity{
     @Column({type:"int"})
     age: number;
     
-    @Colunm({type:text})
+    @Column({type:"text"})
     password:string;
     
     @Column({type:"text"})
@@ -40,11 +40,36 @@ class User extends BaseEntity{
     @Column({type:"text"})
     profilePhoto:string;
     
+    @Column({type:"boolean", default:false})
+    isDriving: boolean;
+    
+    @Column({type:"boolean", default:false})
+    isRiding: boolean;
+    
+    @Column({type:"boolean", default:false})
+    isTaken: boolean;
+    
+    @Column({type:"double precision", default: 0})
+    lastLng: number;
+    
+    @Column({type:"double precision", default: 0})
+    lastLat: number;
+    
+    @Column({type:"double precision", default: 0})
+    lastOrientation: number;
+    
     @CreateDateColumn()
     createdAt:string;
     
     @UpdateDateColumn()
     updateAt:string;
+    
+    get fullName() : string{
+        return `${this.firstName}${this.lastName}`;
+    }
 };
+
+//double precision 는 postgresql에서 지원하는 type중 하나 float 과 같음.
+
 
 export default User;
