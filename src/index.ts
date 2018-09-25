@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import { Options } from "graphql-yoga";
 import { createConnection } from "typeorm";
 import  app from "./app";
@@ -10,6 +13,7 @@ const GRAPHQL_ENDPOINT : string = "/graphql";
 
 const appOptions : Options = {
     port : PORT,
+    subscriptions: '/subscriptions',
     playground : PLAYGROUND_ENDPOINT, 
     // yarn dev 한다음,
     //c9 에서 Run 실행하고
@@ -23,10 +27,15 @@ const handleAppStart = ():void => {
 };
 
 
-
+// app.start(appOptions, handleAppStart).then(  () => {    
+//     //typeorm 을 통하여 DB에 연결한후 app 실행
+//     createConnection( connectionOptions );
+//     })
+//     .catch( error => {console.log(error)} );
 
 
 createConnection( connectionOptions ).then(  () => {    
     //typeorm 을 통하여 DB에 연결한후 app 실행
     app.start(appOptions, handleAppStart);
-});
+    })
+    .catch( error => {console.log(error)} );
