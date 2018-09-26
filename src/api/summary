@@ -1,0 +1,4 @@
+여기 graphql 파일들은
+
+yarn types 시 schemas.graphql에
+몰아주기 위함이다.
