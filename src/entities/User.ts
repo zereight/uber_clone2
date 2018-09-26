@@ -1,14 +1,20 @@
+import bcrypt from "bcrypt";
+
 import {IsEmail} from "class-validator"; // int, float등 type check라기보단
 //email형식이 맞는지 검사하는 validation(유효성) check임
 
 import {
     BaseEntity,
+    BeforeInsert,
+    BeforeUpdate,
     Column,
     CreateDateColumn,
     Entity,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm" ;
+
+const BCRYPT_ROUNDS = 10; //how much hashing?
 
 @Entity() //decorator
 class User extends BaseEntity{
@@ -67,6 +73,20 @@ class User extends BaseEntity{
     get fullName() : string{
         return `${this.firstName}${this.lastName}`;
     }
+    
+    @BeforeInsert()
+    @BeforeUpdate()
+    async savePassword() : Promise<void> {
+        if( this.password ){
+            const hashedPassword = await this.hashPassword(this.password);
+            this.password = hashedPassword;
+        }
+    }
+    
+    private hashPassword ( password : string ) : Promise<string> {
+        return bcrypt.hash( password, BCRYPT_ROUNDS );
+    }
+    
 };
 
 //double precision 는 postgresql에서 지원하는 type중 하나 float 과 같음.
