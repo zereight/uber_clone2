@@ -19,7 +19,7 @@ import {
 import Chat from "./Chat";
 import Message from "./Message";
 import Ride from "./Ride";
-import Verification from "/Verification";
+import Verification from "./Verification";
 
 const BCRYPT_ROUNDS = 10; //how much hashing?
 
@@ -38,7 +38,7 @@ class User extends BaseEntity{
     @Column({type:"text"})
     lastName: string;
     
-    @Column({type:"int"})
+    @Column({type:"int", nullable: true})
     age: number;
     
     @Column({type:"text"})
@@ -84,10 +84,10 @@ class User extends BaseEntity{
     verifications : Verification[];
     
     @OneToMany( type=> Ride, ride => ride.passenger )
-    ridsAsPassenger : Ride[];
+    rideAsPassenger : Ride[];
     
     @OneToMany( type=> Ride, ride => ride.driver )
-    ridsAsDriver : Ride[];
+    rideAsDriver : Ride[];
     
     @CreateDateColumn()
     createdAt:string;
