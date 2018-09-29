@@ -28,9 +28,9 @@ class User extends BaseEntity{
     @PrimaryGeneratedColumn() 
     id:number;
     
-    @Column({type:"text", unique:true})
+    @Column({type:"text", nullable:true})
     @IsEmail()
-    email: string;
+    email: string | null;
     
     @Column({type:"text"})
     firstName: string;

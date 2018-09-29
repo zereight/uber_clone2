@@ -23,19 +23,7 @@ const resolvers : Resolvers = {
                                 token: "Coming soon"
                             };
                         }
-                        else {
-                            try{
-                                
-                            }catch(error){
-                                return {
-                                ok: false,
-                                error: error.message,
-                                token: null
-                                }
-                            }
-                        } 
-                    }
-                    catch( error ){
+                    } catch( error ){
                         return {
                             ok: false,
                             error: error.message,
@@ -43,7 +31,24 @@ const resolvers : Resolvers = {
                         };
                     }
                     
+                    try{
+                        await User.create({
+                            ...args,
+                            profilePhoto: `http://graph.facebook.com/${fbId}/picture?type=square`
+                        }).save();
                     
+                      return {
+                          ok: false,
+                          error : null,
+                          token: null
+                      };  
+                    } catch( error ){
+                        return {
+                            ok: false,
+                            error: error.message,
+                            token: null
+                        };
+                    }
                 }
     }
 };
