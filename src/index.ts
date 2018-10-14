@@ -16,9 +16,9 @@ const appOptions : Options = {
     subscriptions: '/subscriptions',
     playground : PLAYGROUND_ENDPOINT, 
     // yarn dev 한다음,
-    //c9 에서 Run 실행하고
-    //https://asdsdasd-rlaeogus890.c9users.io/playground 로 접속하면 
-    //graphql playground 볼수 있다.!
+    // c9 에서 Run 실행하고
+    // https://asdsdasd-rlaeogus890.c9users.io/playground 로 접속하면 
+    // graphql playground 볼수 있다.!
     endpoint : GRAPHQL_ENDPOINT
 };
 
@@ -26,16 +26,8 @@ const handleAppStart = ():void => {
     console.log(`Listening on port ${PORT}`);
 };
 
-
-// app.start(appOptions, handleAppStart).then(  () => {    
-//     //typeorm 을 통하여 DB에 연결한후 app 실행
-//     createConnection( connectionOptions );
-//     })
-//     .catch( error => {console.log(error)} );
-
-
 createConnection( connectionOptions ).then(  () => {    
-    //typeorm 을 통하여 DB에 연결한후 app 실행
+    // typeorm 을 통하여 DB에 연결한후 app 실행
     app.start(appOptions, handleAppStart);
     })
     .catch( error => {console.log(error)} );

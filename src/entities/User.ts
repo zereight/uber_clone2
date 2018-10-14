@@ -1,7 +1,7 @@
-import bcrypt from "bcrypt";
+import pbkdf2 from "pbkdf2";
 
 import {IsEmail} from "class-validator"; // int, float등 type check라기보단
-//email형식이 맞는지 검사하는 validation(유효성) check임
+ // email형식이 맞는지 검사하는 validation(유효성) check임
 
 import {
     BaseEntity,
@@ -10,20 +10,19 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
     ManyToOne,
-    OneToMany
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn 
 } from "typeorm" ;
 
 import Chat from "./Chat";
 import Message from "./Message";
 import Ride from "./Ride";
-import Verification from "./Verification";
 
-const BCRYPT_ROUNDS = 10; //how much hashing?
+const BCRYPT_ROUNDS = 10; // how much hashing?
 
-@Entity() //decorator
+@Entity() // decorator
 class User extends BaseEntity{
     @PrimaryGeneratedColumn() 
     id:number;
@@ -80,9 +79,6 @@ class User extends BaseEntity{
     @OneToMany( type => Message, message => message.user )
     messages: Message[];
     
-    @OneToMany( type => Verification,  verification => verification.user)
-    verifications : Verification[];
-    
     @OneToMany( type=> Ride, ride => ride.passenger )
     rideAsPassenger : Ride[];
     
@@ -100,7 +96,7 @@ class User extends BaseEntity{
     }
     
     public comparePassword( password: string ) : Promise<boolean> {
-        return bcrypt.compare( password, this.password );
+        return pbkdf2.compare( password, this.password );
     }
     
     @BeforeInsert()
@@ -113,12 +109,12 @@ class User extends BaseEntity{
     }
     
     private hashPassword ( password : string ) : Promise<string> {
-        return bcrypt.hash( password, BCRYPT_ROUNDS );
+        return pbkdf2.hash( password, BCRYPT_ROUNDS );
     }
     
 };
 
-//double precision 는 postgresql에서 지원하는 type중 하나 float 과 같음.
+// double precision 는 postgresql에서 지원하는 type중 하나 float 과 같음.
 
 
 export default User;
