@@ -13,17 +13,17 @@ const resolvers: Resolvers = {
                 const existingVerification = await Verification.findOne({payload: phoneNumber});
                 if(existingVerification){
                     existingVerification.remove();
-                    return {
-                        ok: false,
-                        error:"The PhoneNumber is existing."
-                    };
+                    
                 }
-                else{
-                    return {
-                        ok: true,
-                        error: "The PhoneNumber is not exist."
-                    };
-                }
+                
+                const newVerification = await Verification.create({
+                    payload: phoneNumber,
+                    target: "PHONE"
+                }).save();
+
+                // to do sms
+                
+
             }catch(error){
                 return {
                     ok: false,

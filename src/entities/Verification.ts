@@ -28,10 +28,7 @@ class Verification extends BaseEntity {
     
     @Column({type: "text"})
     key: string;
-    
-    @Column({type: "boolean"})
-    used: boolean;
-    
+
     @CreateDateColumn({type: "text"})
     createdAt: string;
     
