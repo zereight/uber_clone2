@@ -13,6 +13,6 @@ export const SendSMS  =  (to: string, body: string) : Promise<any>=> {
     });
 }
 
-export const sendVerification = (to: string, key: string) => {
+export const sendVerificationSMS = (to: string, key: string) => {
     SendSMS(to, `Your Verification key is ${key}`);
 }
